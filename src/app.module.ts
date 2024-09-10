@@ -8,26 +8,30 @@ import { MajorsModule } from './majors/majors.module';
 import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { FacultiesModule } from './faculties/faculties.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { EnrollModule } from './enroll/enroll.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     TypeOrmModule.forRoot({
       type: "postgres",
       // url: "postgresql://postgres:zxfouDCoHDuVezriVfdbaidltCJXDRNg@meticulous-empathy.railway.internal:5432/railway",
-      host: "127.0.0.1",
-      port: 5432,
-      database: "ppiu",
-      username: "postgres",
-      password: "root",
-      entities: [Student],
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      database: process.env.DB_NAME,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
-      synchronize: true
     }),
     StudentsModule,
     MajorsModule,
     UsersModule,
     CoursesModule,
-    FacultiesModule
+    FacultiesModule,
+    EnrollModule
   ],
   controllers: [AppController],
   providers: [AppService],

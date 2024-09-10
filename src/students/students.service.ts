@@ -1,35 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { Student } from './entities/student.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
 export class StudentsService {
   constructor(
-    @InjectRepository(Student)
-    private readonly studentRepository: Repository<Student>
+    @InjectDataSource() private readonly datasource: DataSource
   ){}
 
   create(createStudentDto: CreateStudentDto) {
-    const student = this.studentRepository.create(createStudentDto)
-    return this.studentRepository.save(student);
+   return "";
   }
 
   findAll() {
-    return this.studentRepository.find();
+     
+    const query = `select * from students`;
+    
+    return this.datasource.query(query);
+
   }
 
   findOne(id: string) {
-    return this.studentRepository.findOneBy({student_id: id});
+    return ""
   }
 
   update(id: string, updateStudentDto: UpdateStudentDto) {
-    return this.studentRepository.update(id, updateStudentDto);
+    return ""
   }
 
   remove(id: string) {
-    return this.studentRepository.delete(id);
+    return ""
   }
 }
