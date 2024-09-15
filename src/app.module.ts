@@ -3,13 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentsModule } from './students/students.module';
-import { Student } from './students/entities/student.entity';
-import { MajorsModule } from './majors/majors.module';
-import { UsersModule } from './users/users.module';
-import { CoursesModule } from './courses/courses.module';
-import { FacultiesModule } from './faculties/faculties.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { EnrollModule } from './enroll/enroll.module';
+import { ConfigModule } from '@nestjs/config';
+import { EnrollItemsModule } from './enroll-items/enroll-items.module';
+import { EnrollRequestsModule } from './enroll-requests/enroll-requests.module';
 
 @Module({
   imports: [
@@ -27,11 +23,8 @@ import { EnrollModule } from './enroll/enroll.module';
       autoLoadEntities: true,
     }),
     StudentsModule,
-    MajorsModule,
-    UsersModule,
-    CoursesModule,
-    FacultiesModule,
-    EnrollModule
+    EnrollItemsModule,
+    EnrollRequestsModule
   ],
   controllers: [AppController],
   providers: [AppService],
