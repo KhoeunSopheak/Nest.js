@@ -10,6 +10,6 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS', // Allow all standard HTTP methods
     // allowedHeaders: 'Content-Type, Authorization', // Allow specific headers
   });
-  await app.listen(configService.get('PORT') | 3001);
+  await app.listen(configService.get('PORT') || 3001);
 }
 bootstrap();
