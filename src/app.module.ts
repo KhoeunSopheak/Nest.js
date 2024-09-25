@@ -6,6 +6,9 @@ import { StudentsModule } from './students/students.module';
 import { ConfigModule } from '@nestjs/config';
 import { EnrollItemsModule } from './enroll-items/enroll-items.module';
 import { EnrollRequestsModule } from './enroll-requests/enroll-requests.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigsModule } from './configs/jwt-secret';
 
 @Module({
   imports: [
@@ -17,7 +20,7 @@ import { EnrollRequestsModule } from './enroll-requests/enroll-requests.module';
       // url: "postgresql://postgres:zxfouDCoHDuVezriVfdbaidltCJXDRNg@meticulous-empathy.railway.internal:5432/railway",
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT),
-      ssl: process.env.ENVIRONMENT == 'local' ? false : { rejectUnauthorized: false },
+      // ssl: process.env.ENVIRONMENT == 'local' ? false : { rejectUnauthorized: false },
       database: process.env.DB_NAME,
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
@@ -25,7 +28,10 @@ import { EnrollRequestsModule } from './enroll-requests/enroll-requests.module';
     }),
     StudentsModule,
     EnrollItemsModule,
-    EnrollRequestsModule
+    EnrollRequestsModule,
+    UsersModule,
+    AuthModule,
+    ConfigsModule
   ],
   controllers: [AppController],
   providers: [AppService],

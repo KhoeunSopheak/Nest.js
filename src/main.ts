@@ -11,5 +11,6 @@ async function bootstrap() {
     // allowedHeaders: 'Content-Type, Authorization', // Allow specific headers
   });
   await app.listen(configService.get('PORT') || 3001);
+  
 }
 bootstrap();
