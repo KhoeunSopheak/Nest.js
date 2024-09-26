@@ -44,6 +44,16 @@ export class UsersService {
     }
   }
 
+  async findByEmail(email: string) {
+    const query = 'SELECT user_id as "userId", first_name, last_name, email, password FROM users WHERE email = $1';
+    const result = await this.datasource.query(query, [email]);
+
+    if (result.length > 0) {
+      return result[0];
+    }
+    return null;
+  }
+
   async findAllUsers() {
     const query = 'SELECT user_id as "userId", first_name as "first_name", last_name as "last_name", email, password FROM users';
     const result = await this.datasource.query(query);
